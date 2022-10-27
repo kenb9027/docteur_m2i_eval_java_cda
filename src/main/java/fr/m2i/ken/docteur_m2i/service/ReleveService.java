@@ -18,7 +18,6 @@ public interface ReleveService {
             Patient patient,
             Medecin medecin);
     Releve getReleveById(Long id);
-    ArrayList<Releve> getAllReleves();
 
     ArrayList<Releve> sortByDateDesc();
 
