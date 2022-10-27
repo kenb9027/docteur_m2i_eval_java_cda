@@ -11,13 +11,13 @@ public class Queries {
     public static final String PATIENT_CREATE = "INSERT INTO `personne`(`nom`, `prenom`, `isMedecin`, `date`) VALUES ( ?, ?, 0, ?)";
     public static final String PATIENT_FIND_ALL = "SELECT * FROM `personne` WHERE isMedecin=0";
     public static final String PATIENT_FIND_ONE_BY_ID = "SELECT * FROM `personne` WHERE isMedecin= 0 AND id= ? ";
-    public static final String PATIENT_UPDATE = "";
+    public static final String PATIENT_UPDATE = "UPDATE `personne` SET `nom`=?,`prenom`=? WHERE id = ?";
     public static final String PATIENT_FIND_ALL_BY_AGE = "";
 
     // RELEVE
     public static final String RELEVE_CREATE = "INSERT INTO `releve`(`dateCreation`, `valeur`, `patientId`, `medecinId`, `parametreId`) VALUES ( ?, ?, ?, ?, ? )";
     public static final String RELEVE_FIND_ONE_BY_ID = "SELECT * FROM `releve` WHERE id= ? ";
-    public static final String RELEVE_SORT_BY_DATE_DESC = "SELECT * FROM `releve` ORDER BY date DESC";
+    public static final String RELEVE_SORT_BY_DATE_DESC = "SELECT * FROM `releve` ORDER BY dateCreation DESC";
     public static final String RELEVE_DELETE_BY_ID = "DELETE FROM `releve` WHERE id= ?";
 
     // PARAMETRE

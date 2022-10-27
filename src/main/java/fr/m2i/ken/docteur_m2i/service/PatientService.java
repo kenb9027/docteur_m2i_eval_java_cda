@@ -2,12 +2,13 @@ package fr.m2i.ken.docteur_m2i.service;
 
 import fr.m2i.ken.docteur_m2i.business.Patient;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 public interface PatientService {
 
-    Patient addPatient(String nom, String prenom, Date dateNaissance);
+    Patient addPatient(String nom, String prenom, LocalDateTime dateNaissance);
     Patient getPatientById(Long id);
     ArrayList<Patient> getAllPatients();
 

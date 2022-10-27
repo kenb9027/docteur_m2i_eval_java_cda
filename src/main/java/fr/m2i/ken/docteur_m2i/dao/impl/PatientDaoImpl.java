@@ -7,6 +7,7 @@ import fr.m2i.ken.docteur_m2i.dao.PatientDao;
 import fr.m2i.ken.docteur_m2i.dao.Queries;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PatientDaoImpl implements PatientDao {
@@ -31,7 +32,7 @@ public class PatientDaoImpl implements PatientDao {
         );
         preparedStatement.setString(1, patient.getNom());
         preparedStatement.setString(2, patient.getPrenom());
-        preparedStatement.setDate(3, (Date) patient.getDateNaissance());
+        preparedStatement.setTimestamp(3, patient.getDateNaissanceTimestamp());
         preparedStatement.executeUpdate();
 
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -56,7 +57,8 @@ public class PatientDaoImpl implements PatientDao {
             patient.setId(resultSet.getLong("id"));
             patient.setNom(resultSet.getString("nom"));
             patient.setPrenom(resultSet.getString("prenom"));
-            patient.setDateNaissance(resultSet.getDate("date"));
+            LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
+            patient.setDateNaissance(date);
             return patient;
 
         }
@@ -76,7 +78,8 @@ public class PatientDaoImpl implements PatientDao {
             patient.setId(resultSet.getLong("id"));
             patient.setNom(resultSet.getString("nom"));
             patient.setPrenom(resultSet.getString("prenom"));
-            patient.setDateNaissance(resultSet.getDate("date"));
+            LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
+            patient.setDateNaissance(date);
             patientList.add(patient);
         }
         return patientList;
@@ -84,7 +87,15 @@ public class PatientDaoImpl implements PatientDao {
 
     @Override
     public Patient update(Patient patient) throws SQLException {
-        return null;
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                Queries.PATIENT_UPDATE
+        );
+        preparedStatement.setString(1, patient.getNom());
+        preparedStatement.setString(2, patient.getPrenom());
+        preparedStatement.setLong(3, patient.getId());
+        preparedStatement.executeUpdate();
+
+        return patient;
     }
 
     @Override

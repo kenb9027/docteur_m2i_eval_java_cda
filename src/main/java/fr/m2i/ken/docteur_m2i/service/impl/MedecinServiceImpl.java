@@ -6,15 +6,16 @@ import fr.m2i.ken.docteur_m2i.dao.impl.MedecinDaoImpl;
 import fr.m2i.ken.docteur_m2i.service.MedecinService;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class MedecinServiceImpl implements MedecinService {
 
     private MedecinDao medecinDao = new MedecinDaoImpl();
 
     @Override
-    public Medecin addMedecin(String nom, String prenom, Date dateEmbauche) {
+    public Medecin addMedecin(String nom, String prenom, LocalDateTime dateEmbauche) {
         Medecin newMedecin = new Medecin(nom , prenom, dateEmbauche);
         try {
             return medecinDao.create(newMedecin);

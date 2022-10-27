@@ -23,6 +23,18 @@ public class Releve {
         this.medecin = medecin;
     }
 
+    @Override
+    public String toString() {
+        return "Releve{" +
+                "id=" + id +
+                ", dateCreation=" + dateCreation +
+                ", valeur=" + valeur +
+                ", parametre=" + parametre +
+                ", patient=" + patient +
+                ", medecin=" + medecin +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

@@ -6,6 +6,7 @@ import fr.m2i.ken.docteur_m2i.dao.MedecinDao;
 import fr.m2i.ken.docteur_m2i.dao.Queries;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MedecinDaoImpl implements MedecinDao {
@@ -27,9 +28,10 @@ public class MedecinDaoImpl implements MedecinDao {
                 Queries.MEDECIN_CREATE,
                 Statement.RETURN_GENERATED_KEYS
         );
+
         preparedStatement.setString(1, medecin.getNom());
         preparedStatement.setString(2, medecin.getPrenom());
-        preparedStatement.setDate(3, (Date) medecin.getDateEmbauche());
+        preparedStatement.setTimestamp(3, medecin.getDateEmbaucheTimestamp());
         preparedStatement.executeUpdate();
 
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -55,7 +57,8 @@ public class MedecinDaoImpl implements MedecinDao {
             medecin.setId(resultSet.getLong("id"));
             medecin.setNom(resultSet.getString("nom"));
             medecin.setPrenom(resultSet.getString("prenom"));
-            medecin.setDateEmbauche(resultSet.getDate("date"));
+            LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
+            medecin.setDateEmbauche(date);
             return medecin;
 
         }
@@ -75,7 +78,8 @@ public class MedecinDaoImpl implements MedecinDao {
             medecin.setId(resultSet.getLong("id"));
             medecin.setNom(resultSet.getString("nom"));
             medecin.setPrenom(resultSet.getString("prenom"));
-            medecin.setDateEmbauche(resultSet.getDate("date"));
+            LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
+            medecin.setDateEmbauche(date);
             medecinList.add(medecin);
         }
         return medecinList;

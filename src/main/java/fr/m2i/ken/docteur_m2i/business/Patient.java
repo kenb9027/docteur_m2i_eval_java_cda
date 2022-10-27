@@ -1,24 +1,40 @@
 package fr.m2i.ken.docteur_m2i.business;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Patient extends Personne{
 
-    private Date dateNaissance;
+    private LocalDateTime dateNaissance;
 
     public Patient() {
     }
 
-    public Patient(String nom, String prenom, Date dateNaissance) {
+    public Patient(String nom, String prenom, LocalDateTime dateNaissance) {
         super(nom, prenom);
         this.dateNaissance = dateNaissance;
     }
 
-    public Date getDateNaissance() {
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + getId() + " , nom=" + getNom() +
+                " , prenom=" + getPrenom() +
+                " , dateNaissance=" + dateNaissance.getDayOfMonth() +"/"+dateNaissance.getMonthValue() +"/"+dateNaissance.getYear() +
+                '}';
+    }
+
+    public LocalDateTime getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(Date dateNaissance) {
+    public Timestamp getDateNaissanceTimestamp() {
+        Timestamp tmstp = Timestamp.valueOf(dateNaissance);
+        return tmstp;
+    }
+
+    public void setDateNaissance(LocalDateTime dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 }

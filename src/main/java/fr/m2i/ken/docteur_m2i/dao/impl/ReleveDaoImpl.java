@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class ReleveDaoImpl implements ReleveDao {
 
     private Connection connection;
-    ParametreDao parametreDao ;
-    MedecinDao medecinDao ;
-    PatientDao patientDao ;
+    ParametreDao parametreDao = new ParametreDaoImpl();
+    MedecinDao medecinDao = new MedecinDaoImpl();
+    PatientDao patientDao = new PatientDaoImpl() ;
 
     public ReleveDaoImpl(){
         try {
@@ -40,7 +40,7 @@ public class ReleveDaoImpl implements ReleveDao {
         preparedStatement.setLong(5 , releve.getParametre().getId() );
 
 
-        preparedStatement.executeQuery();
+        preparedStatement.executeUpdate();
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
         if (resultSet.next())
@@ -84,9 +84,9 @@ public class ReleveDaoImpl implements ReleveDao {
             releve.setId(resultSet.getLong("id"));
             releve.setDateCreation(resultSet.getTimestamp("dateCreation").toLocalDateTime());
             releve.setValeur(resultSet.getFloat("valeur"));
-            releve.setParametre( parametreDao.findOneById( resultSet.getLong("parametreId") ) );
-            releve.setMedecin( medecinDao.findOneById( resultSet.getLong("medecinId") ) );
-            releve.setPatient( patientDao.findOneById( resultSet.getLong("patientId") ) );
+            releve.setParametre( this.parametreDao.findOneById( resultSet.getLong("parametreId") ) );
+            releve.setMedecin( this.medecinDao.findOneById( resultSet.getLong("medecinId") ) );
+            releve.setPatient( this.patientDao.findOneById( resultSet.getLong("patientId") ) );
             releveList.add(releve);
         }
         return releveList;

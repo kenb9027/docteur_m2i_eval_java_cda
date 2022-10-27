@@ -2,6 +2,7 @@ package fr.m2i.ken.docteur_m2i.business;
 
 public class Personne {
 
+    protected String toString = "";
     private Long id;
     private String nom;
     private String prenom;
@@ -12,6 +13,11 @@ public class Personne {
     public Personne(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 
     public Long getId() {
