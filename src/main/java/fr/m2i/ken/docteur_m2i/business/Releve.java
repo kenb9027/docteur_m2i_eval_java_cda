@@ -1,5 +1,6 @@
 package fr.m2i.ken.docteur_m2i.business;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Releve {
@@ -33,6 +34,13 @@ public class Releve {
     public LocalDateTime getDateCreation() {
         return dateCreation;
     }
+
+    public Timestamp getDateCreationTimestamp() {
+        Timestamp tmstp = Timestamp.valueOf(dateCreation);
+        return tmstp;
+    }
+
+
 
     public void setDateCreation(LocalDateTime dateCreation) {
         this.dateCreation = dateCreation;

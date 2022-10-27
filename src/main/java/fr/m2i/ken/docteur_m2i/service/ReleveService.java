@@ -22,7 +22,7 @@ public interface ReleveService {
 
     ArrayList<Releve> sortByDateDesc();
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
 
 

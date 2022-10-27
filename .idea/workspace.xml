@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="177b7b2e-bfe2-455a-a01d-c9d438876813" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Releve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Releve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/Queries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/Queries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/ReleveDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/ReleveDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/service/ReleveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/service/ReleveService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -56,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666856553391</updated>
-      <workItem from="1666856555320" duration="3723000" />
+      <workItem from="1666856555320" duration="7750000" />
     </task>
     <servers />
   </component>
