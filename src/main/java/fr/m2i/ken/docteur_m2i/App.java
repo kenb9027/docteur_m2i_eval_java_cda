@@ -69,7 +69,7 @@ public class App {
                     System.out.println();
                     break;
                 case 3:
-                    System.out.println("voir patient selon age");
+                    System.out.println("TODO :voir patient selon age");
                     System.out.println();
                     break;
                 case 4:
@@ -81,11 +81,11 @@ public class App {
                     System.out.println();
                     break;
                 case 6:
-                    System.out.println("ajouter relevé");
+                    System.out.println("TODO : ajouter relevé");
                     System.out.println();
                     break;
                 case 7:
-                    System.out.println("supprimer relevé");
+                    deleteReleve();
                     System.out.println();
                     break;
                 case 8:
@@ -205,6 +205,10 @@ public class App {
     }
 
     /**
+     * 4. Voir les patient selon un age donné
+     */
+
+    /**
      * 5. Voir tous les medecins
      */
     public static void displayAllMedecins (){
@@ -212,6 +216,52 @@ public class App {
         for (Medecin medecin :
                 medecinService.getAllMedecins() ) {
             System.out.println(medecin);
+        }
+    }
+
+    /**
+     * 6. Ajouter un relevé
+     */
+
+    /**
+     * 7. Supprimer un relevé
+     */
+    public static void deleteReleve()
+    {
+        System.out.println("Supprimer un relevé :");
+        Scanner scanner = new Scanner(System.in);
+
+        Long idReleve = 0L;
+        ArrayList<Long> releveIdList = new ArrayList<>();
+        for (Releve releve :
+                releveService.sortByDateDesc() ) {
+            releveIdList.add(releve.getId());
+        }
+        boolean isReleveExist = releveIdList.contains(idReleve);
+        while (!isReleveExist)
+        {
+            System.out.println("Quels relevé souhaitez vous supprimer ?");
+            for (Releve releve :
+                    releveService.sortByDateDesc() ) {
+                System.out.println(releve);
+            }
+            System.out.println("Id :");
+            idReleve = scanner.nextLong();
+            isReleveExist = releveIdList.contains(idReleve);
+            if (!isReleveExist)
+            {
+                System.out.println("Ce relevé n'éxiste pas.");
+            }
+
+
+        }
+        boolean bool = releveService.deleteById(idReleve);
+        if (!bool){
+            System.out.print("Relevé #"+ idReleve +" supprimé !");
+        }
+        else {
+            System.out.print("Erreur : Relevé #"+ idReleve +" NON supprimé !");
+
         }
     }
 
