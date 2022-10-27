@@ -546,7 +546,7 @@ public class App {
         Medecin medecin1 = medecinService.addMedecin("Valjean", "Jean", localDateTime1);
         Medecin medecin2 = medecinService.addMedecin("Granger", "Hermione", localDateTime2);
 
-        // 2 patients
+        // 4 patients
         Patient patient1 =  patientService.addPatient("Sacquet" , "Frodon" , localDateTime3 );
         Patient patient2 =  patientService.addPatient("Gamegie" , "Sam" , localDateTime4 );
         Patient patient3 =  patientService.addPatient("Touque" , "Pippin" , localDateTime5 );
