@@ -7,8 +7,7 @@
     <list default="true" id="177b7b2e-bfe2-455a-a01d-c9d438876813" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/impl/PatientDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/impl/PatientDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666856553391</updated>
-      <workItem from="1666856555320" duration="10200000" />
+      <workItem from="1666856555320" duration="10870000" />
     </task>
     <servers />
   </component>
