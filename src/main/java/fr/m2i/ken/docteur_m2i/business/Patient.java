@@ -18,10 +18,10 @@ public class Patient extends Personne{
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "id=" + getId() + " , nom=" + getNom() +
-                " , prenom=" + getPrenom() +
-                " , dateNaissance=" + dateNaissance.getDayOfMonth() +"/"+dateNaissance.getMonthValue() +"/"+dateNaissance.getYear() +
+        return "Patient : " +
+                " id= " + getId() + " , nom= " + getNom() +
+                " , prenom= " + getPrenom() +
+                " , dateNaissance= " + dateNaissance.getDayOfMonth() +"/"+dateNaissance.getMonthValue() +"/"+dateNaissance.getYear() +
                 '}';
     }
 

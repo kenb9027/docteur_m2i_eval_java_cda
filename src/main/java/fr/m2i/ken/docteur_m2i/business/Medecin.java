@@ -18,10 +18,10 @@ public class Medecin extends Personne{
 
 
     public String toString() {
-        return super.toString + "Medecin {" +
-                " id= " + getId() + " , nom= " + getNom() +
-                " , prenom= " + getPrenom() +
-                " , dateEmbauche= " + dateEmbauche.getDayOfMonth() +"/"+dateEmbauche.getMonthValue() +"/"+dateEmbauche.getYear() +
+        return super.toString + "Medecin :" +
+                " id = " + getId() + " , nom = " + getNom() +
+                " , prenom = " + getPrenom() +
+                " , dateEmbauche = " + dateEmbauche.getDayOfMonth() +"/"+dateEmbauche.getMonthValue() +"/"+dateEmbauche.getYear() +
                 '}';
     }
 

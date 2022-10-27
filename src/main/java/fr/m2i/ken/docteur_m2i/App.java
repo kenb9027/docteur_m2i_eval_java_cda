@@ -141,7 +141,7 @@ public class App {
         String prenom = scanner.next();
 
         // demande de la date de naissance
-        System.out.print("Date de naissance :");
+        System.out.println("Date de naissance :");
         LocalDateTime date = askForDate() ;
 
         //enregistrement

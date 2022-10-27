@@ -25,13 +25,14 @@ public class Releve {
 
     @Override
     public String toString() {
-        return "Releve{" +
-                "id=" + id +
-                ", dateCreation=" + dateCreation +
-                ", valeur=" + valeur +
-                ", parametre=" + parametre +
-                ", patient=" + patient +
-                ", medecin=" + medecin +
+        return "Releve :" +
+                " id = " + id +
+                " , dateCreation = " + dateCreation.getDayOfMonth() +"/"+dateCreation.getMonthValue() +"/"+dateCreation.getYear() +
+                " à " + dateCreation.getHour() +":"+dateCreation.getMinute() +
+                " , patient = " + patient +
+                " , parametre = " + parametre +
+                " , valeur = " + valeur +
+                " , medecin = " + medecin +
                 '}';
     }
 

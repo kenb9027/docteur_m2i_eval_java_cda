@@ -14,9 +14,9 @@ public class Parametre {
 
     @Override
     public String toString() {
-        return "Parametre{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
+        return "Param. : " +
+                "id =" + id +
+                ", nom ='" + nom + '\'' +
                 '}';
     }
 
