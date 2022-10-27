@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="177b7b2e-bfe2-455a-a01d-c9d438876813" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Medecin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Medecin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Observation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Observation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Parametre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Parametre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Personne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Personne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Releve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/business/Releve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/Queries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/dao/Queries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/service/MedecinService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/ken/docteur_m2i/service/MedecinService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -62,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666856553391</updated>
-      <workItem from="1666856555320" duration="688000" />
+      <workItem from="1666856555320" duration="3108000" />
     </task>
     <servers />
   </component>
