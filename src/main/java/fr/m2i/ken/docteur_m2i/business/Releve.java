@@ -25,15 +25,29 @@ public class Releve {
 
     @Override
     public String toString() {
+
         return "Releve :" +
                 " id = " + id +
-                " , dateCreation = " + dateCreation.getDayOfMonth() +"/"+dateCreation.getMonthValue() +"/"+dateCreation.getYear() +
-                " à " + dateCreation.getHour() +":"+dateCreation.getMinute() +
+                " , dateCreation = " + addZeroIfMinusTen(dateCreation.getDayOfMonth()) +"/"+addZeroIfMinusTen(dateCreation.getMonthValue()) +"/"+dateCreation.getYear() +
+                " à " + addZeroIfMinusTen(dateCreation.getHour()) +":"+ addZeroIfMinusTen(dateCreation.getMinute()) +
                 " , patient = " + patient +
                 " , parametre = " + parametre +
                 " , valeur = " + valeur +
                 " , medecin = " + medecin +
                 '}';
+    }
+
+    /**
+     * Add a zero if the number is inferior to 10 (for minutes , hours , dayOfMonth , Month )
+     * @param nb number
+     * @return string value of number, with or without zero
+     */
+    public String addZeroIfMinusTen(int nb){
+        if (nb < 10){
+            return "0"+nb;
+        }
+        return String.valueOf(nb);
+
     }
 
     public Long getId() {
