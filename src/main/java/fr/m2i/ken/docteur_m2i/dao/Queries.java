@@ -12,7 +12,6 @@ public class Queries {
     public static final String PATIENT_FIND_ALL = "SELECT * FROM `personne` WHERE isMedecin=0";
     public static final String PATIENT_FIND_ONE_BY_ID = "SELECT * FROM `personne` WHERE isMedecin= 0 AND id= ? ";
     public static final String PATIENT_UPDATE = "UPDATE `personne` SET `nom`=?,`prenom`=? WHERE id = ?";
-    public static final String PATIENT_FIND_ALL_BY_AGE = "";
 
     // RELEVE
     public static final String RELEVE_CREATE = "INSERT INTO `releve`(`dateCreation`, `valeur`, `patientId`, `medecinId`, `parametreId`) VALUES ( ?, ?, ?, ?, ? )";

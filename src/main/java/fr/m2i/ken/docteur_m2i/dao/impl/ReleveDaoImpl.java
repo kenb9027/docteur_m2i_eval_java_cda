@@ -10,14 +10,17 @@ import java.util.ArrayList;
 public class ReleveDaoImpl implements ReleveDao {
 
     private Connection connection;
-    ParametreDao parametreDao = new ParametreDaoImpl();
-    MedecinDao medecinDao = new MedecinDaoImpl();
-    PatientDao patientDao = new PatientDaoImpl() ;
+    private ParametreDao parametreDao = new ParametreDaoImpl();
+    private MedecinDao medecinDao = new MedecinDaoImpl();
+    private PatientDao patientDao = new PatientDaoImpl() ;
 
     public ReleveDaoImpl(){
+
+        //on teste la connection à la base de donnée lors de la création de l'objet
         try {
             connection = ConnectionBDD.getConnection();
 
+            //on en profite pour tester la création des dao
             ParametreDao parametreDao = new ParametreDaoImpl();
             MedecinDao medecinDao = new MedecinDaoImpl();
             PatientDao patientDao = new PatientDaoImpl();
@@ -29,10 +32,12 @@ public class ReleveDaoImpl implements ReleveDao {
     }
     @Override
     public Releve create(Releve releve) throws SQLException {
+        // préparation de la requete pour la base de données
         PreparedStatement preparedStatement = connection.prepareStatement(
                 Queries.RELEVE_CREATE,
                 Statement.RETURN_GENERATED_KEYS
         );
+        //on charge les données dans la requete, en remplacant les "?" par les valeurs de l'objet
         preparedStatement.setTimestamp(1, releve.getDateCreationTimestamp());
         preparedStatement.setFloat(2, releve.getValeur());
         preparedStatement.setLong(3 , releve.getPatient().getId() );
@@ -40,9 +45,11 @@ public class ReleveDaoImpl implements ReleveDao {
         preparedStatement.setLong(5 , releve.getParametre().getId() );
 
 
+        //execution de la requete , puis on récupère la clé générée (si elle existe)
         preparedStatement.executeUpdate();
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
+        //si la clé existe , on l'assigne à l'objet renvoyé
         if (resultSet.next())
         {
             releve.setId(resultSet.getLong(1));

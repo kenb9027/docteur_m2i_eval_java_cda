@@ -14,11 +14,14 @@ import java.util.ArrayList;
 
 public class ReleveServiceImpl implements ReleveService {
 
-    ReleveDao releveDao = new ReleveDaoImpl();
+    private ReleveDao releveDao = new ReleveDaoImpl();
 
     @Override
     public Releve addReleve(LocalDateTime dateCreation, float valeur, Parametre parametre, Patient patient, Medecin medecin) {
+        // on crée un objet avec les données reçue
         Releve newReleve = new Releve(dateCreation, valeur, parametre, patient, medecin);
+
+        // on tente la création en BDD
         try {
             return releveDao.create(newReleve);
         } catch (SQLException e) {

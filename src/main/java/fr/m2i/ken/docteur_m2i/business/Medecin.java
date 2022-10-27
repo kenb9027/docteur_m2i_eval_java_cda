@@ -28,6 +28,11 @@ public class Medecin extends Personne{
     public LocalDateTime getDateEmbauche() {
         return dateEmbauche;
     }
+
+    /**
+     * Get DateEmbauche format on timestamp
+     * @return
+     */
     public Timestamp getDateEmbaucheTimestamp() {
         Timestamp tmstp = Timestamp.valueOf(dateEmbauche);
         return tmstp;

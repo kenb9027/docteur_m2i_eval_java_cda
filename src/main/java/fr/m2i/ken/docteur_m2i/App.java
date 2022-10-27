@@ -37,15 +37,19 @@ public class App {
         System.out.println("Bienvenue sur Docteur M2i !");
         System.out.println();
         Scanner sc1 = new Scanner(System.in);
+        //initialisation du choix pour éviter les erreurs
         int choiceInt = 1;
         do {
+            //affichage du menu
             displayMenu();
             String choice = sc1.next();
-            // on redemande tant que ce n'est pas un chiffre entre 1 et 8  TODO:make limit dynamic in loop
+            // on redemande tant que ce n'est pas un chiffre ET qu'il soit compris entre 1 et 8
             while (true){
                 try {
+                    //on tente de caster le chiffre reçu en Integer : si cela échou , ce n'est pas un nombre entier
                     choiceInt = Integer.parseInt(choice);
                     if (choiceInt > 8 || choiceInt < 1){
+                        //on vérifie que le chiffre est entre 1 et 8 : si non , on reprends la boucle
                         System.err.println("Entrez un nombre entre 1 et 8 svp! ");
                         choice = sc1.next(); // clear scanner wrong input
                         continue; // continues to loop if exception is found
@@ -69,7 +73,7 @@ public class App {
                     System.out.println();
                     break;
                 case 3:
-                    System.out.println("TODO :voir patient selon age");
+                    getPatientListByAge();
                     System.out.println();
                     break;
                 case 4:
@@ -129,16 +133,18 @@ public class App {
         System.out.println("Ajouter un patient:");
         Scanner scanner = new Scanner(System.in);
 
-        // nom et prénom
+        //demande des nom et prénom
         System.out.print("Nom:");
         String nom = scanner.next();
 
         System.out.print("Prénom:");
         String prenom = scanner.next();
 
+        // demande de la date de naissance
         System.out.print("Date de naissance :");
         LocalDateTime date = askForDate() ;
 
+        //enregistrement
         Patient patient =  patientService.addPatient(nom, prenom, date);
         System.out.println("Patient ajouté :");
         System.out.println(patient);
@@ -152,13 +158,16 @@ public class App {
         System.out.println("Modifier un patient:");
         Scanner scanner = new Scanner(System.in);
 
+        //on vérifie tout d'abord que le patient existe
         Long idPatient = 0L;
+        //on crée une liste contenant les ID des patients existants
         ArrayList<Long> patientIdList = new ArrayList<>();
         for (Patient patient :
                 patientService.getAllPatients() ) {
             patientIdList.add(patient.getId());
         }
         boolean isPatientExist = patientIdList.contains(idPatient);
+        //tant que le chiffre donnée ne correspond pas à l'ID d'un patient existant , on reprends la boulcle
         while (!isPatientExist)
         {
             System.out.println("Quels patient souhaitez vous modifier ?");
@@ -176,15 +185,14 @@ public class App {
         }
         Patient oldPatient = patientService.getPatientById(idPatient);
 
-        // nom et prénom
+        //changement nom et prénom
         System.out.println("Nom:" + "(anciennement " + oldPatient.getNom() + ")");
         String nom = scanner.next();
-        System.out.println("Prénom:" + "(anciennement " + oldPatient.getNom() + ")");
+        System.out.println("Prénom:" + "(anciennement " + oldPatient.getPrenom() + ")");
         String prenom = scanner.next();
 
-//        System.out.print("Date de naissance :");
-//        LocalDateTime date = askForDate() ;
 
+        //enregistrement en BDD en assignant au 'nouveau' patient l'id du patient séléctionné
         Patient patient = new Patient(nom, prenom, oldPatient.getDateNaissance());
         patient.setId(idPatient);
         Patient updatedPatient =  patientService.updatePatient(patient);
@@ -207,6 +215,48 @@ public class App {
     /**
      * 4. Voir les patient selon un age donné
      */
+    public static void getPatientListByAge()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Quel âge recherchez vous ?");
+        int age = 0;
+        String str = scanner.next();
+
+        //on vérifie que l'age donné est bien un chiffre
+        while (true){
+            try {
+
+                age = Integer.parseInt(str);
+                if (age < 1){
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                //throw new RuntimeException(e);
+                System.err.println("Entrez un nombre valide svp! " + e.getMessage());
+                str = scanner.next(); // clear scanner wrong input
+                continue; // continues to loop if exception is found
+            }
+        }
+
+        //on compare l'age de chaque patient avec l'âge donné
+        LocalDateTime today = LocalDateTime.now();
+        ArrayList<Patient> patientsListByAge = new ArrayList<>();
+        for (Patient patient :
+                patientService.getAllPatients()) {
+            int diff = today.compareTo(patient.getDateNaissance());
+            if (diff == age ){
+                patientsListByAge.add(patient);
+            }
+        }
+
+        System.out.println("Liste des patients agés de " + age + " ans :");
+        for (Patient patient :
+                patientsListByAge ) {
+            System.out.println(patient);
+        }
+
+    }
 
     /**
      * 5. Voir tous les medecins
@@ -227,12 +277,13 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ajouter un Relevé :");
 
-        //date
+        //demande la date et l'heure du relevé
         LocalDateTime date = askForDateTime();
 
-        //parametre
+        //demande le parametre
         Long idParam = 0L;
         ArrayList<Long> paramIdList = new ArrayList<>();
+        // on vérifie que le parametre xhoisi existe en le comparant a une list d'id créée
         for (Parametre parametre :
                 parametreService.getAllParametres() ) {
             paramIdList.add(parametre.getId());
@@ -259,6 +310,7 @@ public class App {
         System.out.println("Entrez la valeur de ce paramètre : ");
         float valeur = 0F;
         String value = scanner.next();
+        //on vérifie que la valeur est bien un nombre FLOAT
         while (true){
             try {
                 valeur = Float.parseFloat(value);
@@ -274,6 +326,7 @@ public class App {
         //patient
         Long idPatient = 0L;
         ArrayList<Long> patientIdList = new ArrayList<>();
+        // on vérifie que le patient choisi existe en le comparant a une list d'id créée
         for (Patient patient :
                 patientService.getAllPatients() ) {
             patientIdList.add(patient.getId());
@@ -299,6 +352,7 @@ public class App {
         //medecin
         Long idMedecin = 0L;
         ArrayList<Long> medecinIdList = new ArrayList<>();
+        // on vérifie que le medecin choisi existe en le comparant a une list d'id créée
         for (Medecin medecin :
                 medecinService.getAllMedecins() ) {
             medecinIdList.add(medecin.getId());
@@ -386,6 +440,7 @@ public class App {
         String[] dateStringList = new String[0] ;
         String[] heureStringList = new String[0] ;
         //date
+        // tant que la date rentrée ne correspond pas au pattern "dd/MM/yyyy" , on redemande "
         boolean dateOk = false;
         while (!dateOk){
             System.out.println("Entrez une date :");
@@ -394,6 +449,7 @@ public class App {
 
             if (dateString.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
                 try {
+                    //on sépare la chaine recu en 3 (jour , mois , année)
                     dateStringList = dateString.split("/");
                     dateOk = true;
                     break;
@@ -407,6 +463,7 @@ public class App {
             System.out.println("Date invalide.");
         }
         //heure
+        // tant que la date rentrée ne correspond pas au pattern "HH:mm" , on redemande "
         boolean heureOk = false;
         while (!heureOk){
             System.out.println("Entrez un horaire :");
@@ -415,6 +472,7 @@ public class App {
 
             if (heureString.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
                 try {
+                    //on sépare la chaine reçu en 2 (heure , minute)
                     heureStringList = heureString.split(":");
                     heureOk = true;
                     break;
@@ -428,7 +486,7 @@ public class App {
             System.out.println("Heure invalide.");
         }
 
-
+        //on crée une nouvelle LocalDateTime avec les données récupérées
         day = LocalDateTime.of(
                 Integer.parseInt(dateStringList[2]),
                 Integer.parseInt(dateStringList[1]),
@@ -471,13 +529,14 @@ public class App {
         return day;
     }
 
+
     /**
      * Fixtures : creer des medecins, patients et parametres
      */
     public static void makeFixtures()
     {
         // 4 localdatetime pour Naissance et Embauche
-        LocalDateTime localDateTime1 =  LocalDateTime.of(2020 , 3, 9, 0 , 0) ;
+        LocalDateTime localDateTime1 =  LocalDateTime.of(1999 , 3, 9, 0 , 0) ;
         LocalDateTime localDateTime2 =  LocalDateTime.of(2022 , 10, 9, 0 , 0) ;
         LocalDateTime localDateTime3 =  LocalDateTime.of(1990 , 4, 1, 0 , 0) ;
         LocalDateTime localDateTime4 =  LocalDateTime.of(1990 , 2, 3, 0 , 0) ;

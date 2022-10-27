@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ParametreServiceImpl implements ParametreService {
 
-    ParametreDao parametreDao = new ParametreDaoImpl();
+    private ParametreDao parametreDao = new ParametreDaoImpl();
     @Override
     public Parametre addParametre(String nom) {
         Parametre newParam = new Parametre(nom);
