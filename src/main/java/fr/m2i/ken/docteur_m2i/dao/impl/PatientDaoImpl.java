@@ -17,6 +17,7 @@ public class PatientDaoImpl implements PatientDao {
         try {
             connection = ConnectionBDD.getConnection();
         }catch (SQLException | ClassNotFoundException e){
+            System.out.println(e);
             throw new RuntimeException();
         }
     }
