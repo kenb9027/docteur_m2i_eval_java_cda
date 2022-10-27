@@ -81,7 +81,7 @@ public class App {
                     System.out.println();
                     break;
                 case 6:
-                    System.out.println("TODO : ajouter relevé");
+                    addReleve();
                     System.out.println();
                     break;
                 case 7:
@@ -222,6 +222,118 @@ public class App {
     /**
      * 6. Ajouter un relevé
      */
+    public static void addReleve()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ajouter un Relevé :");
+
+        //date
+        LocalDateTime date = askForDateTime();
+
+        //parametre
+        Long idParam = 0L;
+        ArrayList<Long> paramIdList = new ArrayList<>();
+        for (Parametre parametre :
+                parametreService.getAllParametres() ) {
+            paramIdList.add(parametre.getId());
+        }
+        boolean isParamExist = paramIdList.contains(idParam);
+        while (!isParamExist)
+        {
+            System.out.println("Quels paramètre souhaitez vous choisir ?");
+            for (Parametre parametre :
+                    parametreService.getAllParametres() ) {
+                System.out.println(parametre);
+            }
+            System.out.println("Id :");
+            idParam = scanner.nextLong();
+            isParamExist = paramIdList.contains(idParam);
+            if (!isParamExist)
+            {
+                System.out.println("Ce paramètre n'éxiste pas.");
+            }
+        }
+        Parametre parametre = parametreService.getParametreById(idParam);
+
+        //valeur
+        System.out.println("Entrez la valeur de ce paramètre : ");
+        float valeur = 0F;
+        String value = scanner.next();
+        while (true){
+            try {
+                valeur = Float.parseFloat(value);
+                break;
+            } catch (NumberFormatException e) {
+                //throw new RuntimeException(e);
+                System.err.println("Entrez un nombre svp! " + e.getMessage());
+                value = scanner.next(); // clear scanner wrong input
+                continue; // continues to loop if exception is found
+            }
+        }
+
+        //patient
+        Long idPatient = 0L;
+        ArrayList<Long> patientIdList = new ArrayList<>();
+        for (Patient patient :
+                patientService.getAllPatients() ) {
+            patientIdList.add(patient.getId());
+        }
+        boolean isPatientExist = patientIdList.contains(idPatient);
+        while (!isPatientExist)
+        {
+            System.out.println("Quels patient souhaitez vous choisir ?");
+            for (Patient patient :
+                    patientService.getAllPatients() ) {
+                System.out.println(patient);
+            }
+            System.out.println("Id :");
+            idPatient = scanner.nextLong();
+            isPatientExist = patientIdList.contains(idPatient);
+            if (!isPatientExist)
+            {
+                System.out.println("Ce patient n'éxiste pas.");
+            }
+        }
+        Patient patient = patientService.getPatientById(idPatient);
+
+        //medecin
+        Long idMedecin = 0L;
+        ArrayList<Long> medecinIdList = new ArrayList<>();
+        for (Medecin medecin :
+                medecinService.getAllMedecins() ) {
+            medecinIdList.add(medecin.getId());
+        }
+        boolean isMedecinexist = medecinIdList.contains(idMedecin);
+        while (!isMedecinexist)
+        {
+            System.out.println("Quels medecin souhaitez vous choisir ?");
+            for (Medecin medecin :
+                    medecinService.getAllMedecins() ) {
+                System.out.println(medecin);
+            }
+            System.out.println("Id :");
+            idMedecin = scanner.nextLong();
+            isMedecinexist = medecinIdList.contains(idMedecin);
+            if (!isMedecinexist)
+            {
+                System.out.println("Ce medecin n'éxiste pas.");
+            }
+        }
+        Medecin medecin = medecinService.getMedecinById(idMedecin);
+
+
+        // create Relevé
+        Releve newReleve = releveService.addReleve(
+                date,
+                valeur,
+                parametre,
+                patient,
+                medecin
+
+        );
+        System.out.println("Relevé ajouté :");
+        System.out.println(newReleve);
+    }
 
     /**
      * 7. Supprimer un relevé
@@ -266,6 +378,68 @@ public class App {
     }
 
     /**
+     * Utils : Ask for a dateTime
+     */
+    public static LocalDateTime askForDateTime() {
+        Scanner dateScanner = new Scanner(System.in);
+        LocalDateTime day = LocalDateTime.now();
+        String[] dateStringList = new String[0] ;
+        String[] heureStringList = new String[0] ;
+        //date
+        boolean dateOk = false;
+        while (!dateOk){
+            System.out.println("Entrez une date :");
+            System.out.println("( au format dd-MM-yyyy )");
+            String dateString = dateScanner.next();
+
+            if (dateString.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+                try {
+                    dateStringList = dateString.split("/");
+                    dateOk = true;
+                    break;
+
+                } catch (Exception e) {
+                    // throw new RuntimeException(e);
+                    System.out.println(dateString);
+                    System.out.println("Date invalide.");
+                }
+            }
+            System.out.println("Date invalide.");
+        }
+        //heure
+        boolean heureOk = false;
+        while (!heureOk){
+            System.out.println("Entrez un horaire :");
+            System.out.println("( au format HH:mm )");
+            String heureString = dateScanner.next();
+
+            if (heureString.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+                try {
+                    heureStringList = heureString.split(":");
+                    heureOk = true;
+                    break;
+
+                } catch (Exception e) {
+                    // throw new RuntimeException(e);
+                    System.out.println(heureString);
+                    System.out.println("Heure invalide.");
+                }
+            }
+            System.out.println("Heure invalide.");
+        }
+
+
+        day = LocalDateTime.of(
+                Integer.parseInt(dateStringList[2]),
+                Integer.parseInt(dateStringList[1]),
+                Integer.parseInt(dateStringList[0]),
+                Integer.parseInt(heureStringList[0]) ,
+                Integer.parseInt(heureStringList[1]) );
+
+        return day;
+    }
+
+    /**
      * Utils : Ask for a date
      * @return
      */
@@ -275,6 +449,7 @@ public class App {
 
         boolean dateOk = false;
         while (!dateOk){
+            System.out.println("Entrez une date :");
             System.out.println("( au format dd-MM-yyyy )");
             String dateString = dateScanner.next();
 
